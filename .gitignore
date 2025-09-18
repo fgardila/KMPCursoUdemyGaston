@@ -1,0 +1,70 @@
+# Kotlin Multiplatform Project
+# Android & iOS app with Jetpack Compose Multiplatform
+
+# Gradle
+.gradle/
+**/build/
+!src/**/build/
+gradlew
+gradlew.bat
+gradle-wrapper.jar
+
+# Android
+*.iml
+.idea/
+local.properties
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Kotlin
+.kotlin/
+*.kotlin_module
+
+# iOS
+xcuserdata/
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+Pods/
+*.xcworkspace
+*.xcuserstate
+DerivedData/
+
+# Compose Multiplatform
+.compose-resources/
+
+# JetBrains IDEs
+.idea/
+*.iws
+*.ipr
+out/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Generated files
+generated/
+gen/
