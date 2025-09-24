@@ -1,4 +1,4 @@
-package com.example.kmpcursoudemygaston
+package com.example.kmpcursoudemygaston.utils
 
 import android.os.Build
 

@@ -1,4 +1,4 @@
-package com.example.kmpcursoudemygaston
+package com.example.kmpcursoudemygaston.utils
 
 import platform.UIKit.UIDevice
 

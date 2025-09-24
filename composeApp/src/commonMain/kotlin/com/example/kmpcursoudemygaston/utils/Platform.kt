@@ -1,4 +1,4 @@
-package com.example.kmpcursoudemygaston
+package com.example.kmpcursoudemygaston.utils
 
 interface Platform {
     val name: String
