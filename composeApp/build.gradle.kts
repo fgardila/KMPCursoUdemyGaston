@@ -43,9 +43,6 @@ kotlin {
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.9.0")
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
-            api("moe.tlaster:precompose:1.6.2")
-            api("moe.tlaster:precompose-viewmodel:1.6.2")
-
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

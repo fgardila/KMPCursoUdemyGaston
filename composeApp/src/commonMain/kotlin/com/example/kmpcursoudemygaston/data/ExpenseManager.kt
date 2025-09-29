@@ -47,6 +47,18 @@ object ExpenseManager {
             amount = 30.0,
             category = ExpenseCategory.OTHER,
             description = "Miscellaneous"
+        ),
+        Expense(
+            id = currentId++,
+            amount = 75.0,
+            category = ExpenseCategory.GROCERIES,
+            description = "Weekly groceries"
+        ),
+        Expense(
+            id = currentId++,
+            amount = 40.0,
+            category = ExpenseCategory.TRANSPORT,
+            description = "Taxi fare"
         )
     )
 
@@ -63,6 +75,13 @@ object ExpenseManager {
                 category = expense.category,
                 description = expense.description
             )
+        }
+    }
+
+    fun deleteExpense(expense: Expense) {
+        val index = fakeExpenseList.indexOfFirst { it.id == expense.id }
+        if (index != -1) {
+            fakeExpenseList.removeAt(index)
         }
     }
 

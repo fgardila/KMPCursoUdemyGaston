@@ -31,10 +31,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kmpcursoudemygaston.data.ExpenseManager
 import com.example.kmpcursoudemygaston.domain.model.Expense
+import com.example.kmpcursoudemygaston.presentation.ExpensesUiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ExpensesScreen(
+    uiState: ExpensesUiState,
     onExpenseClick: (Expense) -> Unit
 ) {
     val color = getColorsTheme()
@@ -47,12 +49,12 @@ fun ExpensesScreen(
             Column(
                 modifier = Modifier.background(color = color.backgroundColor)
             ) {
-                ExpensesTotalHeader(1234.56)
+                ExpensesTotalHeader(uiState.totalAmount)
                 AllExpensesHeader()
             }
         }
 
-        items(ExpenseManager.fakeExpenseList) {
+        items(uiState.expenses) {
             ExpensesItem(expense = it, onExpenseClick = { expense ->
                 onExpenseClick(expense)
             })
@@ -63,7 +65,13 @@ fun ExpensesScreen(
 @Preview(showBackground = true)
 @Composable
 fun ExpensesScreenPreview() {
-    ExpensesScreen(onExpenseClick = {})
+    ExpensesScreen(
+        uiState = ExpensesUiState(
+            expenses = ExpenseManager.fakeExpenseList,
+            totalAmount = ExpenseManager.fakeExpenseList.sumOf { it.amount }
+        ),
+        onExpenseClick = {}
+    )
 }
 
 @Composable
