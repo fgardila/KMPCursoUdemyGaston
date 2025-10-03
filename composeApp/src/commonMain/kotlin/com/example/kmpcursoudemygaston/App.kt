@@ -25,54 +25,65 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.kmpcursoudemygaston.di.appModule
 import com.example.kmpcursoudemygaston.navigation.AppRoutes
 import com.example.kmpcursoudemygaston.navigation.Navigation
 import com.example.kmpcursoudemygaston.ui.AppTheme
 import com.example.kmpcursoudemygaston.ui.DarkModeColors
 import com.example.kmpcursoudemygaston.ui.getColorsTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinApplication
 
 @Composable
 @Preview(showBackground = true)
 fun App() {
-    val colors = getColorsTheme()
-    val navController = rememberNavController()
-    val title = getCurrentTitle(navController)
-    val isHome = getCurrentRouteIsHome(navController)
-    AppTheme {
-        Scaffold(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = colors.backgroundColor),
-            topBar = {
-                TopBar(colors, title = title, isHome = isHome, navController = navController)
-            },
-            floatingActionButton = {
-                if (isHome) {
-                    FloatingActionButton(
-                        modifier = Modifier.padding(8.dp),
-                        shape = RoundedCornerShape(50),
-                        containerColor = colors.addIconColor,
-                        contentColor = Color.White,
-                        onClick = {
-                            navController.navigate(
-                                route = AppRoutes.AddExpense()
+
+    KoinApplication(
+        application = {
+            modules(appModule())
+        }
+    ) {
+        val colors = getColorsTheme()
+        val navController = rememberNavController()
+        val title = getCurrentTitle(navController)
+        val isHome = getCurrentRouteIsHome(navController)
+        AppTheme {
+            Scaffold(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = colors.backgroundColor),
+                topBar = {
+                    TopBar(colors, title = title, isHome = isHome, navController = navController)
+                },
+                floatingActionButton = {
+                    if (isHome) {
+                        FloatingActionButton(
+                            modifier = Modifier.padding(8.dp),
+                            shape = RoundedCornerShape(50),
+                            containerColor = colors.addIconColor,
+                            contentColor = Color.White,
+                            onClick = {
+                                navController.navigate(
+                                    route = AppRoutes.AddExpense()
+                                )
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = "Add Expense",
+                                tint = Color.White
                             )
                         }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = "Add Expense",
-                            tint = Color.White
-                        )
                     }
-                }
-            },
-            containerColor = colors.backgroundColor,
-        ) { innerPadding ->
-            Navigation(navController = navController, innerPadding = innerPadding)
+                },
+                containerColor = colors.backgroundColor,
+            ) { innerPadding ->
+                Navigation(navController = navController, innerPadding = innerPadding)
+            }
         }
     }
+
+
 }
 
 @Composable

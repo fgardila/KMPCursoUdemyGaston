@@ -7,26 +7,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.example.kmpcursoudemygaston.data.ExpenseManager
-import com.example.kmpcursoudemygaston.data.ExpenseRepositoryImpl
 import com.example.kmpcursoudemygaston.presentation.ExpenseViewModel
 import com.example.kmpcursoudemygaston.ui.ExpenseDetailScreen
 import com.example.kmpcursoudemygaston.ui.ExpensesScreen
 import com.example.kmpcursoudemygaston.ui.getColorsTheme
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun Navigation(navController: NavHostController, innerPadding: PaddingValues) {
+fun Navigation(
+    viewModel: ExpenseViewModel = koinViewModel(),
+    navController: NavHostController,
+    innerPadding: PaddingValues
+) {
 
     val colors = getColorsTheme()
-
-    val viewModel = viewModel {
-        ExpenseViewModel(repo = ExpenseRepositoryImpl(ExpenseManager))
-    }
 
     NavHost(
         navController = navController,
