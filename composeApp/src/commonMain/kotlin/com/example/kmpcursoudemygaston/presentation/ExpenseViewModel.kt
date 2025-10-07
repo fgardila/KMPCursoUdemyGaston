@@ -20,13 +20,21 @@ class ExpenseViewModel(private val repo: ExpenseRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ExpensesUiState())
     val uiState = _uiState.asStateFlow()
+    private var allExpenses: MutableList<Expense> = mutableListOf()
 
-    private val allExpenses = repo.getAllExpenses()
     private val categories = repo.getCategories()
 
     init {
         getAllExpenses()
     }
+
+    private fun updateExpenseList() {
+        viewModelScope.launch {
+            allExpenses = repo.getAllExpenses().toMutableList()
+            updateState()
+        }
+    }
+
 
     private fun updateState() {
         _uiState.update { state ->
@@ -35,31 +43,24 @@ class ExpenseViewModel(private val repo: ExpenseRepository) : ViewModel() {
     }
 
     fun getAllExpenses() {
-        viewModelScope.launch {
-            updateState()
-        }
+        repo.getAllExpenses()
+        updateExpenseList()
 
     }
 
     fun addExpense(expense: Expense) {
-        viewModelScope.launch {
-            repo.addExpense(expense)
-            updateState()
-        }
+        repo.addExpense(expense)
+        updateExpenseList()
     }
 
     fun editExpense(expense: Expense) {
-        viewModelScope.launch {
-            repo.updateExpense(expense)
-            updateState()
-        }
+        repo.updateExpense(expense)
+        updateExpenseList()
     }
 
     fun deleteExpense(expense: Expense) {
-        viewModelScope.launch {
-            repo.deleteExpense(expense)
-            updateState()
-        }
+        repo.deleteExpense(expense)
+        updateExpenseList()
     }
 
     fun getExpenseWithId(id: Long): Expense? {

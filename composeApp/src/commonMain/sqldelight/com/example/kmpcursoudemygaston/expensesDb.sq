@@ -1,0 +1,37 @@
+CREATE TABLE ExpenseEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    amount REAL NOT NULL,
+    categoryName TEXT NOT NULL,
+    description TEXT NOT NULL
+);
+
+INSERT INTO ExpenseEntity (amount, categoryName, description)
+VALUES
+(50.0, 'GROCERIES', 'Supermarket'),
+(20.0, 'TRANSPORT', 'Bus ticket'),
+(15.5, 'SNACKS', 'Lunch'),
+(100.0, 'PARTY', 'Concert'),
+(5.0, 'COFFEE', 'Coffee'),
+(200.0, 'HOUSE', 'Rent'),
+(30.0, 'OTHER', 'Miscellaneous'),
+(75.0, 'GROCERIES', 'Weekly groceries'),
+(40.0, 'TRANSPORT', 'Taxi fare');
+
+
+insert:
+INSERT INTO ExpenseEntity(amount, categoryName, description)
+VALUES (?,?,?);
+
+update:
+UPDATE ExpenseEntity
+SET amount = ?,
+    categoryName = ?,
+    description = ?
+WHERE id = ?;
+
+delete:
+DELETE FROM ExpenseEntity
+WHERE id = ?;
+
+selectAll:
+SELECT * FROM ExpenseEntity;

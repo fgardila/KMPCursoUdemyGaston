@@ -62,28 +62,5 @@ object ExpenseManager {
         )
     )
 
-    fun addNewExpense(expense: Expense) {
-        val expenseWithId = expense.copy(id = currentId++)
-        fakeExpenseList.add(expenseWithId)
-    }
-
-    fun editExpense(expense: Expense) {
-        val index = fakeExpenseList.indexOfFirst { it.id == expense.id }
-        if (index != -1) {
-            fakeExpenseList[index] = fakeExpenseList[index].copy(
-                amount = expense.amount,
-                category = expense.category,
-                description = expense.description
-            )
-        }
-    }
-
-    fun deleteExpense(expense: Expense) {
-        val index = fakeExpenseList.indexOfFirst { it.id == expense.id }
-        if (index != -1) {
-            fakeExpenseList.removeAt(index)
-        }
-    }
-
     fun getCategories(): List<ExpenseCategory> = ExpenseCategory.entries
 }
